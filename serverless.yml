@@ -1,0 +1,27 @@
+# Welcome to serverless. Read the docs
+# https://serverless.com/framework/docs/
+
+# Serverless.yml is the configuration the CLI
+# uses to deploy your code to your provider of choice
+
+# The `service` block is the name of the service
+service: cinerank
+
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment: ${file(env.yml)}
+
+# The `functions` block defines what code to deploy
+functions:
+  getMovie:
+    handler: handler.getMovie
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: api/movie
+          method: get
+          cors: true
+plugins:
+  - serverless-offline

@@ -12,12 +12,25 @@
     <h1 class="title is-1">CineRank</h1>
     <div class="columns">
       <div class="column is-offset-2">
-        <img src="http://image.tmdb.org/t/p/w600/p1rcJ0ipSHS7UVu9wPOwUpFnRRE.jpg" class="hvr-grow movie-select" /><br />
-        <a href="#">I Haven't Seen This</a>
+        <img src="http://image.tmdb.org/t/p/w600/p1rcJ0ipSHS7UVu9wPOwUpFnRRE.jpg" class="hvr-grow movie-select" /><br /><br /><br /><br />
+        <a class="button is-primary is-outlined hvr-fade">
+          <span class="icon">
+            <i class="fa fa-film"></i>
+          </span>
+          <span>I Haven't Seen This</span>
+        </a>
+      </div>
+      <div class="column is-1">
+        &nbsp;
       </div>
       <div class="column">
-        <img src="http://image.tmdb.org/t/p/w600/rfjrAyAueCOwErk67vnkMB0Uxvj.jpg" class="hvr-grow movie-select" /><br />
-        <a href="#">I Haven't Seen This</a>
+        <img src="http://image.tmdb.org/t/p/w600/rfjrAyAueCOwErk67vnkMB0Uxvj.jpg" class="hvr-grow movie-select" /><br /><br /><br /><br />
+        <a class="button is-primary is-outlined hvr-fade">
+          <span class="icon">
+            <i class="fa fa-film"></i>
+          </span>
+          <span>I Haven't Seen This</span>
+        </a>
       </div>
       <div class="column is-2">
         &nbsp;
@@ -37,6 +50,11 @@
       });
     });
   </script>
+  <style>
+    .movie-select{
+      z-index:9999;
+    }
+  </style>
 </body>
 
 </html>

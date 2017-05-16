@@ -3,11 +3,40 @@
   <title>CineRank</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover.css" />
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
 <body>
-  <h1 class="title is-1">CineRank</h1>
+  <div class="container">
+    <h1 class="title is-1">CineRank</h1>
+    <div class="columns">
+      <div class="column is-offset-2">
+        <img src="http://image.tmdb.org/t/p/w600/p1rcJ0ipSHS7UVu9wPOwUpFnRRE.jpg" class="hvr-grow movie-select" /><br />
+        <a href="#">I Haven't Seen This</a>
+      </div>
+      <div class="column">
+        <img src="http://image.tmdb.org/t/p/w600/rfjrAyAueCOwErk67vnkMB0Uxvj.jpg" class="hvr-grow movie-select" /><br />
+        <a href="#">I Haven't Seen This</a>
+      </div>
+      <div class="column is-2">
+        &nbsp;
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function () {
+      console.log('test123');
+      $('.movie-select').on('click', function () {
+        console.log('clicked');
+        $(this).addClass('hvr-pop');
+      }).hover(function () {
+
+      }, function () {
+        $(this).removeClass('hvr-pop');
+      });
+    });
+  </script>
 </body>
 
 </html>

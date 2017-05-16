@@ -6,13 +6,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover.css" />
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/vue"></script>
+
 </head>
 <body>
-  <div class="container">
+  <div id="app" class="container">
     <h1 class="title is-1">CineRank</h1>
     <div class="columns">
       <div class="column is-offset-2">
-        <img src="http://image.tmdb.org/t/p/w600/p1rcJ0ipSHS7UVu9wPOwUpFnRRE.jpg" class="hvr-grow movie-select" /><br /><br /><br /><br />
+        <img src="http://image.tmdb.org/t/p/w600/p1rcJ0ipSHS7UVu9wPOwUpFnRRE.jpg" v-on:click="pick" class="hvr-grow movie-select" /><br /><br /><br /><br />
         <a class="button is-primary is-outlined hvr-fade">
           <span class="icon">
             <i class="fa fa-film"></i>
@@ -24,7 +26,7 @@
         &nbsp;
       </div>
       <div class="column">
-        <img src="http://image.tmdb.org/t/p/w600/rfjrAyAueCOwErk67vnkMB0Uxvj.jpg" class="hvr-grow movie-select" /><br /><br /><br /><br />
+        <img src="http://image.tmdb.org/t/p/w600/rfjrAyAueCOwErk67vnkMB0Uxvj.jpg" v-on:click="pick" class="hvr-grow movie-select" /><br /><br /><br /><br />
         <a class="button is-primary is-outlined hvr-fade">
           <span class="icon">
             <i class="fa fa-film"></i>
@@ -38,6 +40,17 @@
     </div>
   </div>
   <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!',
+      },
+      methods: {
+        pick: function () {
+          alert('Movie picked!');
+        },
+      },
+    });
     $(document).ready(function () {
       console.log('test123');
       $('.movie-select').on('click', function () {

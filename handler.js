@@ -7,7 +7,7 @@ module.exports.getMovie = (event, context, callback) => {
 
   MovieDB.discoverMovie({
     sort_by: 'original_title.asc',
-    'vote_count.gte': 500,
+    'vote_count.gte': getRandomInt(250, 1000),
   }, (err, res) => {
     if (err) {
       callback(err, err);
@@ -26,3 +26,9 @@ module.exports.getMovie = (event, context, callback) => {
   });
 
 };
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min;
+}

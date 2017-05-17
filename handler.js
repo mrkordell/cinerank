@@ -7,7 +7,8 @@ module.exports.getMovie = (event, context, callback) => {
 
   MovieDB.discoverMovie({
     sort_by: 'original_title.asc',
-    'vote_count.gte': getRandomInt(250, 1000),
+    'vote_count.gte': 500,
+    page: getRandomInt(1, 50),
   }, (err, res) => {
     if (err) {
       callback(err, err);

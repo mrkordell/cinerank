@@ -73,6 +73,7 @@
           var _this = this;
           axios.get('https://api.cinebound.com/rank/api/movie').then(function (response) {
             _this.movies = response.data.results;
+            _this.newMovies();
           });
         },
 

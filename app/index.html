@@ -12,10 +12,9 @@
   <div id="app" class="container">
     <h1 class="title is-1">CineRank</h1>
     <div class="columns">
-      <div class="column">&nbsp;</div>
-      <div class="column" v-for="(movie, idx) in m">
+      <div class="column movie" v-for="(movie, idx) in m">
         <img v-bind:src="image(idx)" v-on:click="pick(idx)" class="hvr-grow movie-select" /><br />
-        <h2 class="subtitle">{{movie.title}}</h2><br /><br /><br />
+        <h2 class="subtitle">{{movie.title}}</h2>
         <a class="button is-primary is-outlined hvr-fade" href="#">
           <span class="icon">
             <i class="fa fa-film"></i>
@@ -23,14 +22,24 @@
           <span v-on:click="newMovie(idx)">I Haven't Seen This</span>
         </a>
       </div>
-      <div class="column">&nbsp;</div>
+      <div class="column">
+        <h2 class="title">Rankings</h2>
+        <div v-for="movie in elo">
+          <strong>{{movie.title}}</strong> {{movie.elo}}
+        </div>
+      </div>
     </div>
-    <a class="button is-primary is-outlined hvr-fade is-centered" href="#">
-      <span class="icon">
-        <i class="fa fa-film"></i>
-      </span>
-      <span v-on:click="newMovies">I Haven't Seen Either</span>
-    </a>
+    <div class="columns">
+      <div class="column is-2">&nbsp;</div>
+      <div class="column" style="text-align:center;">
+        <a class="button is-primary is-outlined hvr-fade is-centered" href="#">
+          <span class="icon">
+            <i class="fa fa-film"></i>
+          </span>
+          <span v-on:click="newMovies">I Haven't Seen Either</span>
+        </a>
+      </div>
+      <div class="column is-2">&nbsp;</div>
     <div v-if="winners.length > 0">
       <h2 class="title">Winners</h2>
       <div v-for="winner in winners">
@@ -38,11 +47,7 @@
       </div>
     </div>
   </div>
-  <style>
-    .movie-select{
-      z-index:9999;
-    }
-  </style>
+</div>
 </body>
 
 </html>

@@ -33,7 +33,7 @@ class ServerlessPlugin {
     const args = [
       's3',
       'sync',
-      'app/',
+      'app/dist',
       `s3://${s3Bucket}/`,
     ];
     const result = spawnSync('aws', args);

@@ -1,12 +1,12 @@
 {
   "name": "cinerank",
   "version": "1.0.0",
-  "description": "",
   "main": "handler.js",
   "dependencies": {
     "moviedb": "^0.2.8"
   },
   "devDependencies": {
+    "eslint-config-airbnb": "^15.0.1",
     "serverless-offline": "^3.14.0",
     "serverless-single-page-app-plugin": "file:./serverless-single-page-plugin"
   },
@@ -14,5 +14,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrkordell/cinerank.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mrkordell/cinerank/issues"
+  },
+  "homepage": "https://github.com/mrkordell/cinerank#readme",
+  "description": ""
 }

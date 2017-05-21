@@ -26,6 +26,14 @@ functions:
           path: api/movie
           method: get
           cors: true
+  initialMovies:
+    handler: handler.getInitialMovies
+    # The `events` block defines how to trigger the handler.helloWorld code
+    events:
+      - http:
+          path: api/movies
+          method: get
+          cors: true
 resources:
   Resources:
     ## Specifying the S3 Bucket

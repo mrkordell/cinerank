@@ -7,99 +7,37 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.0.2/css/hover.css" />
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="https://unpkg.com/vue"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
-
 </head>
 <body>
   <div id="app" class="container">
     <h1 class="title is-1">CineRank</h1>
     <div class="columns">
-      <div class="column is-offset-2">
-        <img id="movie-1" v-bind:src="movie_1.img" v-on:click="pick" class="hvr-grow movie-select" /><br /><br /><br /><br />
-        <a class="button is-primary is-outlined hvr-fade">
+      <div class="column">&nbsp;</div>
+      <div class="column" v-for="(movie, idx) in m">
+        <img v-bind:src="image(idx)" v-on:click="pick(idx)" class="hvr-grow movie-select" /><br />
+        <h2 class="subtitle">{{movie.title}}</h2><br /><br /><br />
+        <a class="button is-primary is-outlined hvr-fade" href="#">
           <span class="icon">
             <i class="fa fa-film"></i>
           </span>
-          <span v-on:click="newMovies">I Haven't Seen This</span>
+          <span v-on:click="newMovie(idx)">I Haven't Seen This</span>
         </a>
       </div>
-      <div class="column is-1">
-        &nbsp;
-      </div>
-      <div class="column">
-        <img id="movie-2" v-bind:src="movie_2.img" v-on:click="pick" class="hvr-grow movie-select" /><br /><br /><br /><br />
-        <a class="button is-primary is-outlined hvr-fade">
-          <span class="icon">
-            <i class="fa fa-film"></i>
-          </span>
-          <span v-on:click="newMovies">I Haven't Seen This</span>
-        </a>
-      </div>
-      <div class="column is-2">
-        &nbsp;
+      <div class="column">&nbsp;</div>
+    </div>
+    <a class="button is-primary is-outlined hvr-fade is-centered" href="#">
+      <span class="icon">
+        <i class="fa fa-film"></i>
+      </span>
+      <span v-on:click="newMovies">I Haven't Seen Either</span>
+    </a>
+    <div v-if="winners.length > 0">
+      <h2 class="title">Winners</h2>
+      <div v-for="winner in winners">
+        {{winner.title}}
       </div>
     </div>
   </div>
-  <script>
-    var app = new Vue({
-      el: '#app',
-      data: {
-        movies: [],
-        movie_1: {
-          img: 'http://image.tmdb.org/t/p/w600/p1rcJ0ipSHS7UVu9wPOwUpFnRRE.jpg',
-        },
-        movie_2: {
-          img: 'http://image.tmdb.org/t/p/w600/rfjrAyAueCOwErk67vnkMB0Uxvj.jpg',
-        },
-        path: 'http://image.tmdb.org/t/p/w600',
-      },
-      mounted: function () {
-        this.getMovies();
-      },
-
-      methods: {
-        getRandomInt: function (min, max) {
-          min = Math.ceil(min);
-          max = Math.floor(max);
-          return Math.floor(Math.random() * (max - min)) + min;
-        },
-
-        pick: function () {
-          this.newMovies();
-        },
-
-        getMovies: function () {
-          var _this = this;
-          axios.get('https://api.cinebound.com/rank/api/movie').then(function (response) {
-            _this.movies = response.data.results;
-            _this.newMovies();
-          });
-        },
-
-        newMovies: function () {
-          var m1 = this.getRandomInt(0, 20);
-          var m2 = this.getRandomInt(0, 20);
-          this.movie_1.img = this.path + this.movies[m1].poster_path;
-          this.movie_2.img = this.path + this.movies[m2].poster_path;
-        },
-
-      },
-    });
-    $(document).ready(function () {
-      console.log('test123');
-      $('.movie-select').on('click', function () {
-        console.log('clicked');
-        $(this).addClass('hvr-pop');
-      }).hover(function () {
-
-      }, function () {
-        $(this).removeClass('hvr-pop');
-      });
-    });
-  </script>
   <style>
     .movie-select{
       z-index:9999;

@@ -1,13 +1,12 @@
 {
   "name": "cinerank",
   "version": "1.0.0",
-  "main": "handler.js",
-  "dependencies": {
-    "moviedb": "^0.2.8"
-  },
+  "main": "api/handler.js",
   "devDependencies": {
     "aws-sdk": "^2.54.0",
-    "eslint-config-airbnb": "^15.0.1",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.2.0",
     "serverless-offline": "^3.14.0",
     "serverless-single-page-app-plugin": "file:./serverless-single-page-plugin"
   },

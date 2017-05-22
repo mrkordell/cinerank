@@ -1,21 +1,28 @@
-'use strict';
-
 const MovieDB = require('moviedb')(process.env.MOVIE_DB_KEY);
+
+
+function getRandomInt(min, max) {
+  const minimum = Math.ceil(min);
+  const maximum = Math.floor(max);
+  return Math.floor(Math.random() * (maximum - minimum)) + minimum;
+}
 
 module.exports = {
 
-  getInitialMovies(event, context, callback){
+  getInitialMovies(event, context, callback) {
     let response;
 
     MovieDB.discoverMovie({
       sort_by: 'vote_count.dsc',
-      'vote_count.gte': 750,
+      'vote_count.gte': 400,
       page: getRandomInt(1, 50),
     }, (err, res) => {
       if (err) {
         callback(err, err);
         return console.error(err);
       }
+
+      console.log(res.total_results);
 
       const output = res.results.splice(0, 8);
 
@@ -35,13 +42,15 @@ module.exports = {
 
     MovieDB.discoverMovie({
       sort_by: 'original_title.asc',
-      'vote_count.gte': 750,
+      'vote_count.gte': 400,
       page: getRandomInt(1, 50),
     }, (err, res) => {
       if (err) {
         callback(err, err);
         return console.error(err);
       }
+
+      console.log(res.total_results);
 
       const num = res.results.length;
 
@@ -59,9 +68,3 @@ module.exports = {
     });
   }
 };
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}

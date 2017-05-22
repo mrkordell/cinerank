@@ -1,0 +1,23 @@
+{
+  "name": "cinerank",
+  "version": "1.0.0",
+  "main": "handler.js",
+  "dependencies": {
+    "moviedb": "^0.2.8"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrkordell/cinerank.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/mrkordell/cinerank/issues"
+  },
+  "homepage": "https://github.com/mrkordell/cinerank#readme",
+  "description": ""
+}

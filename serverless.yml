@@ -7,6 +7,12 @@
 # The `service` block is the name of the service
 service: cinerank
 
+package:
+  exclude:
+    - app/**
+    - node_modules/**
+    - serverless-single-page-plugin/**
+
 custom:
   s3Bucket: cinerank
 
@@ -15,11 +21,12 @@ provider:
   name: aws
   runtime: nodejs6.10
   environment: ${file(env.yml)}
+  memorySize: 128
 
 # The `functions` block defines what code to deploy
 functions:
   getMovie:
-    handler: handler.getMovie
+    handler: api/handler.getMovie
     # The `events` block defines how to trigger the handler.helloWorld code
     events:
       - http:
@@ -27,7 +34,7 @@ functions:
           method: get
           cors: true
   initialMovies:
-    handler: handler.getInitialMovies
+    handler: api/handler.getInitialMovies
     # The `events` block defines how to trigger the handler.helloWorld code
     events:
       - http:
@@ -77,8 +84,8 @@ resources:
               #   OriginAccessIdentity: origin-access-identity/cloudfront/E127EXAMPLE51Z
           Enabled: 'true'
           ## Uncomment the following section in case you are using a custom domain
-          # Aliases:
-          # - mysite.example.com
+          Aliases:
+           - rank.cinebound.com
           DefaultRootObject: index.html
           ## Since the Single Page App is taking care of the routing we need to make sure ever path is served with index.html
           ## The only exception are files that actually exist e.h. app.js, reset.css
@@ -106,7 +113,7 @@ resources:
             ViewerProtocolPolicy: redirect-to-https
           ## The certificate to use when viewers use HTTPS to request objects.
           ViewerCertificate:
-            CloudFrontDefaultCertificate: 'true'
+            CloudFrontDefaultCertificate: 'false'
           ## Uncomment the following section in case you want to enable logging for CloudFront requests
           # Logging:
           #   IncludeCookies: 'false'

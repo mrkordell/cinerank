@@ -9,18 +9,24 @@ new Vue({
   el: '#app',
   data: {
     movies: [],
+    shame: [],
     winners: [],
     elo: [],
     m: [
       { poster_path: '/static/images/ring.gif' },
       { poster_path: '/static/images/ring.gif' },
     ],
-    path: 'http://image.tmdb.org/t/p/w600',
-    prod_api: 'https://api.cinebound.com/rank/api',
-    dev_api: 'http://localhost:3000/api',
+    path: 'http://image.tmdb.org/t/p/w500',
+    api_url: process.env.API_HOST,
   },
   mounted() {
     this.getMovies();
+  },
+
+  computed: {
+    topTen() {
+      return this.elo.slice(0, 9);
+    },
   },
 
   methods: {
@@ -81,19 +87,27 @@ new Vue({
 
       this.winners.push(this.m[key]);
 
-      // this.winners.push(this.m.filter(movie => movie.id === event.data.id));
-
       this.newMovies();
     },
 
     haventSeen(id) {
       const movie = this.m[id];
-      this.m.filter(mov => mov.id !== movie.id);
+      this.shame.push(movie);
+
+      this.elo.filter(e => e.id !== movie.id);
+
+      this.newMovie(id);
+    },
+
+    haventSeenEither() {
+      this.shame.push(this.m[0]);
+      this.shame.push(this.m[1]);
+      this.newMovies();
     },
 
     getMovies() {
       const that = this;
-      axios.get(`${this.prod_api}/movies`).then((response) => {
+      axios.get(`${this.api_url}/movies`).then((response) => {
         that.movies = response.data;
         that.checkElo();
         that.newMovies();
@@ -101,15 +115,28 @@ new Vue({
     },
 
     getMovie() {
-      const that = this;
-      axios.get(`${this.prod_api}/movie`).then((response) => {
-        that.movies.push(response.data);
-        that.checkElo();
-      });
+      const elo = this.elo.length;
+      if (this.elo > 20 && this.getRandomInt(0, 1)) {
+        this.movies.push(this.elo[this.getRandomInt(0, elo)]);
+      } else {
+        const that = this;
+        axios.get(`${this.api_url}/movie`).then((response) => {
+          if (this.shame.filter(m => m.id === response.data.id).length === 0) {
+            that.movies.push(response.data);
+            that.checkElo();
+          } else {
+            this.getMovie();
+          }
+        });
+      }
     },
 
     cleanMovies() {
       this.movies = this.movies.filter(n => n !== null);
+    },
+
+    cleanElo() {
+      this.elo = this.elo.filter(n => n !== null);
     },
 
     newMovie(id) {

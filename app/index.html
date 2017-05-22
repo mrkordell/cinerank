@@ -19,12 +19,12 @@
           <span class="icon">
             <i class="fa fa-film"></i>
           </span>
-          <span v-on:click="newMovie(idx)">I Haven't Seen This</span>
+          <span v-on:click="haventSeen(idx)">I Haven't Seen This</span>
         </a>
       </div>
       <div class="column">
         <h2 class="title">Rankings</h2>
-        <div v-for="movie in elo">
+        <div v-for="movie in topTen">
           <strong>{{movie.title}}</strong> {{movie.elo}}
         </div>
       </div>
@@ -36,14 +36,20 @@
           <span class="icon">
             <i class="fa fa-film"></i>
           </span>
-          <span v-on:click="newMovies">I Haven't Seen Either</span>
+          <span v-on:click="haventSeenEither">I Haven't Seen Either</span>
         </a>
       </div>
       <div class="column is-2">&nbsp;</div>
     <div v-if="winners.length > 0">
       <h2 class="title">Winners</h2>
-      <div v-for="winner in winners">
-        {{winner.title}}
+      <div v-for="movie in winners">
+        {{movie.title}}
+      </div>
+    </div>
+    <div v-if="shame.length > 0">
+      <h2 class="title">List of Shame</h2>
+      <div v-for="movie in shame">
+        {{movie.title}}
       </div>
     </div>
   </div>
